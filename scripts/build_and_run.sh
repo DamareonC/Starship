@@ -1,4 +1,4 @@
-if [ ! -d "./external/SFML" ]
+if [ ! -d "./external/SFML/.git" ]
 then
     echo "WARNING: SFML submodule not found. Cloning SFML submodule into /external..."
     git submodule update --init --recursive
