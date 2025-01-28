@@ -3,6 +3,7 @@
         "${workspaceFolder}/external/SFML/include"
     ],
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "string_view": "cpp"
     }
 }

@@ -3,9 +3,7 @@
 #include "IEntity.hpp"
 #include "Bullet.hpp"
 
-#include <SFML/Graphics.hpp>
-
-class Ship : public sf::Drawable, public IEntity
+class Ship : public IEntity
 {
 public:
     Ship();

@@ -2,8 +2,6 @@
 
 extern unsigned int g_WindowWidth, g_WindowHeight;
 
-#include <iostream>
-
 using namespace std::string_view_literals;
 
 Ship::Ship() :
@@ -16,7 +14,8 @@ Ship::Ship() :
 
 void Ship::update()
 {
-    if (m_CooldownUpdates > 0) m_CooldownUpdates--;
+    if (m_CooldownUpdates > 0)
+        m_CooldownUpdates--;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && m_Sprite.getPosition().y >= 0)
         m_Sprite.move(sf::Vector2f(0.0f, -m_Speed));
@@ -41,9 +40,7 @@ void Ship::update()
         m_Bullets[i].update();
 
         if (m_Bullets[i].getPosition().y < 0)
-        {
             m_Bullets.erase(m_Bullets.begin() + i);
-        }
     }
 }
 
@@ -56,5 +53,6 @@ void Ship::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(m_Sprite, states);
 
-    for (size_t i = 0; i < m_Bullets.size(); i++) target.draw(m_Bullets[i], states);
+    for (size_t i = 0; i < m_Bullets.size(); i++)
+        target.draw(m_Bullets[i], states);
 }

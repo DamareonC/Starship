@@ -1,6 +1,6 @@
 #include "Ship.hpp"
 
-unsigned int g_WindowWidth = 640, g_WindowHeight = 480;
+inline unsigned int g_WindowWidth = 640, g_WindowHeight = 480;
 
 void update(Ship& ship)
 {

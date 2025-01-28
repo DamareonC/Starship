@@ -2,9 +2,7 @@
 
 #include "IEntity.hpp"
 
-#include <SFML/Graphics.hpp>
-
-class Bullet : public sf::Drawable, public sf::Transformable, public IEntity
+class Bullet : public IEntity
 {
 public:
     Bullet(sf::Vector2f position);
