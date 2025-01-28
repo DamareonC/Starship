@@ -1,5 +1,8 @@
 {
     "C_Cpp.default.includePath": [
-        "${workspaceFolder}/external/sfml/include"
-    ]
+        "${workspaceFolder}/external/SFML/include"
+    ],
+    "files.associations": {
+        "iostream": "cpp"
+    }
 }

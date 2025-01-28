@@ -1,0 +1,19 @@
+#include "Bullet.hpp"
+
+Bullet::Bullet(sf::Vector2f position)
+{
+    m_Bullet.setSize(sf::Vector2f(m_Size, m_Size));
+    m_Bullet.scale(sf::Vector2f(s_SCALE_FACTOR, s_SCALE_FACTOR));
+    m_Bullet.setFillColor(sf::Color(255, 127, 0));
+    m_Bullet.setPosition(position);
+}
+
+void Bullet::update()
+{
+    m_Bullet.move(sf::Vector2f(0.0f, -m_Speed));
+}
+
+void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    target.draw(m_Bullet, states);
+}
