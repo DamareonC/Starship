@@ -1,6 +1,6 @@
 @echo off
 
-if not exist external\SFML\.git (
+dir /b ".\external\SFML" | findstr "^" > nul || (
     echo Cloning SFML submodule into external\SFML...
     git submodule update --init --recursive
     echo ...Finished cloning SFML submodule

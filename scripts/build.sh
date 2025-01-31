@@ -1,4 +1,6 @@
-if [ ! -d "external/SFML/.git" ]
+#! /bin/bash
+
+if [ -z "$( ls -A './external/SFML' )" ]
 then
     echo "Cloning SFML submodule into external/SFML..."
     git submodule update --init --recursive

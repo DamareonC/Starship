@@ -1,16 +1,28 @@
 # Starship
 
-Game is build with C++ and [SFML](https://www.sfml-dev.org/).
+Game is made with C++ and [SFML](https://www.sfml-dev.org/).
 
 ## Prerequisites
 
-Make sure you have [CMake](https://cmake.org/download/) and [Git](https://git-scm.com/downloads) installed.
+Make sure you have:
+* [CMake](https://cmake.org/download/)
+* [Git](https://git-scm.com/downloads)
+* A C++17 compiler (e.g. GCC, Clang, MSVC)
+* A build system (e.g. Make, Ninja, Visual Studio)
+
+### Linux
 
 For Linux users, SFML requires dependencies to be installed (SFML already comes with these dependences on Windows and macOS).
 
 For Debian-based distros (e.g. Ubuntu, Linux Mint, Pop OS), run:
 1. `sudo apt update`
-2. `sudo apt install libxrandr-dev libxcursor-dev libudev-dev libfreetype-dev libflac-dev libvorbis-dev libgl1-mesa-dev libegl1-mesa-dev libfreetype-dev`
+2. `sudo apt install libxrandr-dev libxcursor-dev libxi-dev libgl1-mesa-dev libudev-dev libfreetype-dev libvorbis-dev libflac-dev libegl1-mesa-dev libbdrm-dev libgbm-dev -y`
+
+For Red Hat-based distros (e.g. Fedora, Red Hat Enterprise Linix), run:
+
+1. `sudo dnf install -y libXrandr-devel libXcursor-devel libXi-devel libgudev-devel freetype-devel libvorbis-devel flac-devel mesa-libGL-devel mesa-libEGL-devel libdrm-devel mesa-libgbm-devel`
+
+For other distros, you need to find the libraries specific to your package manager and install them (search for [these dependencies](https://www.sfml-dev.org/tutorials/3.0/getting-started/build-from-source/#installing-dependencies) on your distro's package manager; look for packages; try to look for packages with the dependency name and either lib and/or dev in the package name, like seen in the above). Note that some distros might come with these dependencies preinstalled.
 
 ## Building Starship
 
