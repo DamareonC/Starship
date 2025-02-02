@@ -1,11 +1,8 @@
 #include "Ship.hpp"
 
-extern unsigned int g_WindowWidth, g_WindowHeight;
-
-using namespace std::string_view_literals;
+inline unsigned int g_WindowWidth, g_WindowHeight;
 
 Ship::Ship() :
-    m_Texture(std::filesystem::path("res/sprites/ship.png"sv)),
     m_Sprite(m_Texture)
 {
     m_Sprite.scale(sf::Vector2f(s_SCALE_FACTOR, s_SCALE_FACTOR));
@@ -35,11 +32,16 @@ void Ship::update()
         m_CooldownUpdates = 20;
     }
 
+    this->updateBullets();
+}
+
+void Ship::updateBullets()
+{
     for (size_t i = 0; i < m_Bullets.size(); i++)
     {
         m_Bullets[i].update();
 
-        if (m_Bullets[i].getPosition().y < 0)
+        if (m_Bullets[i].getPosition().y < 0 || m_Bullets[i].isDestroyed())
             m_Bullets.erase(m_Bullets.begin() + i);
     }
 }
@@ -52,7 +54,11 @@ void Ship::shoot()
 void Ship::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(m_Sprite, states);
+    this->drawBullets(target, states);
+}
 
+void Ship::drawBullets(sf::RenderTarget& target, sf::RenderStates states) const
+{
     for (size_t i = 0; i < m_Bullets.size(); i++)
         target.draw(m_Bullets[i], states);
 }

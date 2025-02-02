@@ -1,17 +1,25 @@
 #include "Ship.hpp"
+#include "Spawner.hpp"
+#include "CollisionDetector.hpp"
 
 inline unsigned int g_WindowWidth = 640, g_WindowHeight = 480;
+constexpr float g_UPDATES_PER_SECOND = 60.0f;
 
-void update(Ship& ship)
+static void update(Ship& ship, Spawner& spawner)
 {
     ship.update();
+    spawner.spawnFallingEntity();
+
+    for (size_t i = 0; i < ship.getBullets().size(); i++)
+        checkCollision(spawner.getFallingEntities(), ship.getBullets()[i]);
 }
 
-void render(sf::RenderWindow& window, const Ship& ship)
+static void render(sf::RenderWindow& window, const Ship& ship, Spawner& spawner)
 {
     window.clear();
 
     window.draw(ship);
+    window.draw(spawner);
 
     window.display();
 }
@@ -21,12 +29,13 @@ void run()
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(g_WindowWidth, g_WindowHeight)), "Starship", sf::Style::Close);
 
     Ship ship;
+    Spawner spawner;
     
     int64_t lastTime, currentTime;
     const sf::Clock clock;
 
     lastTime = clock.getElapsedTime().asMicroseconds();
-    constexpr float usPerUpdate = 1000000.0f / 60.0f;
+    constexpr float usPerUpdate = 1000000.0f / g_UPDATES_PER_SECOND;
     float delta = 0.0f;
 
     while (window.isOpen())
@@ -37,11 +46,11 @@ void run()
 
         while (delta >= 1)
         {
-            update(ship);
+            update(ship, spawner);
             delta--;
         }
 
-        render(window, ship);
+        render(window, ship, spawner);
 
         while (const std::optional event = window.pollEvent())
         {

@@ -8,10 +8,12 @@ project(Starship)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(${PROJECT_NAME}
+    ${CMAKE_SOURCE_DIR}/src/Asteroid.cpp
     ${CMAKE_SOURCE_DIR}/src/Bullet.cpp
     ${CMAKE_SOURCE_DIR}/src/Game.cpp
     ${CMAKE_SOURCE_DIR}/src/Main.cpp
     ${CMAKE_SOURCE_DIR}/src/Ship.cpp
+    ${CMAKE_SOURCE_DIR}/src/Spawner.cpp
 )
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/external/SFML)
