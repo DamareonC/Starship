@@ -12,6 +12,8 @@ static void update(Ship& ship, Spawner& spawner)
 
     for (size_t i = 0; i < ship.getBullets().size(); i++)
         checkCollision(spawner.getFallingEntities(), ship.getBullets()[i]);
+
+    checkCollision(spawner.getFallingEntities(), ship);
 }
 
 static void render(sf::RenderWindow& window, const Ship& ship, Spawner& spawner)
