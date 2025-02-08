@@ -12,12 +12,11 @@ Spawner::Spawner() :
     m_FallingEntities.reserve(20);
 }
 
-void Spawner::spawnFallingEntity()
+void Spawner::update()
 {
     m_UpdateCount++;
-    
-    if (m_UpdateCount == 10)
-        m_FallingEntities.emplace_back(std::make_unique<Asteroid>(sf::Vector2f(m_SpawnRange(m_Mt), 0.0f), 3.0f));
+
+    this->spawnFallingEntity();
 
     if (m_FallingEntities.size() > 0)
     {
@@ -32,6 +31,12 @@ void Spawner::spawnFallingEntity()
     
     if (m_UpdateCount >= 60)
         m_UpdateCount = 0;
+}
+
+void Spawner::spawnFallingEntity()
+{
+    if (m_UpdateCount == 10)
+        m_FallingEntities.emplace_back(std::make_unique<Asteroid>(sf::Vector2f(m_SpawnRange(m_Mt), 0.0f), 3.0f));
 }
 
 void Spawner::draw(sf::RenderTarget& target, sf::RenderStates states) const

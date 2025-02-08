@@ -8,7 +8,7 @@ constexpr float g_UPDATES_PER_SECOND = 60.0f;
 static void update(Ship& ship, Spawner& spawner)
 {
     ship.update();
-    spawner.spawnFallingEntity();
+    spawner.update();
 
     for (size_t i = 0; i < ship.getBullets().size(); i++)
         checkCollision(spawner.getFallingEntities(), ship.getBullets()[i]);
@@ -53,6 +53,12 @@ void run()
         }
 
         render(window, ship, spawner);
+
+        if (ship.isDestroyed())
+        {
+            window.close();
+            continue;
+        }
 
         while (const std::optional event = window.pollEvent())
         {

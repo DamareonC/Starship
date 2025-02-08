@@ -3,7 +3,9 @@
 #include "IFallingEntity.hpp"
 #include "Bullet.hpp"
 
-#include <SFML/Graphics.hpp>
+#include <iostream>
+
+inline uint32_t g_Score = 0;
 
 void checkCollision(const std::vector<std::unique_ptr<IFallingEntity>>& fallingEntities, IEntity& entity)
 {
@@ -16,6 +18,15 @@ void checkCollision(const std::vector<std::unique_ptr<IFallingEntity>>& fallingE
             {
                 fallingEntities[i]->destroy();
                 bullet->destroy();
+                g_Score++;
+                std::printf("%u\n", g_Score);
+            }
+
+            Ship* ship = dynamic_cast<Ship*>(&entity);
+
+            if (ship != nullptr)
+            {
+                ship->destroy();
             }
         }
 }
