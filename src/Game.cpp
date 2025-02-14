@@ -2,6 +2,8 @@
 #include "Spawner.hpp"
 #include "CollisionDetector.hpp"
 
+#include <iostream>
+
 inline unsigned int g_WindowWidth = 640, g_WindowHeight = 480;
 constexpr float g_UPDATES_PER_SECOND = 60.0f;
 
@@ -10,8 +12,8 @@ static void update(Ship& ship, Spawner& spawner)
     ship.update();
     spawner.update();
 
-    for (size_t i = 0; i < ship.getBullets().size(); i++)
-        checkCollision(spawner.getFallingEntities(), ship.getBullets()[i]);
+    for (Bullet& bullet : ship.getBullets())
+        checkCollision(spawner.getFallingEntities(), bullet);
 
     checkCollision(spawner.getFallingEntities(), ship);
 }
@@ -29,6 +31,7 @@ static void render(sf::RenderWindow& window, const Ship& ship, Spawner& spawner)
 void run()
 {
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(g_WindowWidth, g_WindowHeight)), "Starship", sf::Style::Close);
+    window.setPosition(sf::Vector2i(window.getPosition().x / 2, window.getPosition().y / 2));
 
     Ship ship;
     Spawner spawner;
@@ -75,4 +78,6 @@ void run()
             }
         }
     }
+
+    std::printf("Final Score: %u\n", g_Score);
 }

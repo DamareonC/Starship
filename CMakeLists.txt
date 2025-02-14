@@ -7,7 +7,7 @@ project(Starship LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
-set(CMAKE_XCODE_SCHEME_WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+set(VS_STARTUP_PROJECT ${PROJECT_NAME})
 
 include(FetchContent)
 FetchContent_Declare(SFML
@@ -23,6 +23,7 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_SOURCE_DIR}/src/Bullet.cpp
     ${CMAKE_SOURCE_DIR}/src/Game.cpp
     ${CMAKE_SOURCE_DIR}/src/Main.cpp
+    ${CMAKE_SOURCE_DIR}/src/Missle.cpp
     ${CMAKE_SOURCE_DIR}/src/Ship.cpp
     ${CMAKE_SOURCE_DIR}/src/Spawner.cpp
 )

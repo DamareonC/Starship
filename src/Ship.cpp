@@ -5,6 +5,9 @@ inline unsigned int g_WindowWidth, g_WindowHeight;
 Ship::Ship() :
     m_Sprite(m_Texture)
 {
+    const sf::Vector2f spawnPoint = sf::Vector2f((g_WindowWidth / 2.0f) - m_Sprite.getTextureRect().size.x, g_WindowHeight - m_Sprite.getTextureRect().size.y * s_SCALE_FACTOR);
+
+    m_Sprite.setPosition(spawnPoint);
     m_Sprite.scale(sf::Vector2f(s_SCALE_FACTOR, s_SCALE_FACTOR));
     m_Bullets.reserve(20);
 }
@@ -59,6 +62,6 @@ void Ship::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void Ship::drawBullets(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for (size_t i = 0; i < m_Bullets.size(); i++)
-        target.draw(m_Bullets[i], states);
+    for (const Bullet& bullet : m_Bullets)
+        target.draw(bullet, states);
 }

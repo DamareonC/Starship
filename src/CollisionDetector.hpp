@@ -7,23 +7,24 @@ inline uint32_t g_Score = 0;
 
 void checkCollision(const std::vector<std::unique_ptr<IFallingEntity>>& fallingEntities, IEntity& entity)
 {
-    for (size_t i = 0; i < fallingEntities.size(); i++)
-        if (fallingEntities[i]->collidingWithEntity(entity))
+    for (const std::unique_ptr<IFallingEntity>& fallingEntity : fallingEntities)
+        if (fallingEntity->collidingWithEntity(entity))
         {
             Bullet* bullet = dynamic_cast<Bullet*>(&entity);
             
             if (bullet != nullptr)
             {
-                fallingEntities[i]->destroy();
+                fallingEntity->destroy();
                 bullet->destroy();
-                g_Score++;
+                g_Score = g_Score + fallingEntity->getScore();
             }
 
             Ship* ship = dynamic_cast<Ship*>(&entity);
 
             if (ship != nullptr)
             {
-                ship->destroy();
+                if (fallingEntity->isDangerous())
+                    ship->destroy();
             }
         }
 }

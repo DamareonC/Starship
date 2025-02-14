@@ -11,6 +11,7 @@ public:
     virtual bool isDangerous() = 0;
     virtual bool isDestroyed() = 0;
     bool collidingWithEntity(const IEntity& entity) const { return this->getGlobalBounds().findIntersection(entity.getGlobalBounds()).has_value(); };
+    virtual uint32_t getScore() const = 0;
     virtual sf::FloatRect getGlobalBounds() const = 0;
     virtual sf::Vector2f getPosition() const = 0;
 protected:

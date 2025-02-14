@@ -12,7 +12,7 @@ public:
     const std::vector<std::unique_ptr<IFallingEntity>>& getFallingEntities() { return m_FallingEntities; };
 private:
     std::mt19937 m_Mt;
-    std::uniform_int_distribution<uint32_t> m_SpawnRange;
+    std::uniform_int_distribution<uint32_t> m_SpawnRange, m_FallingEntityType;
     std::vector<std::unique_ptr<IFallingEntity>> m_FallingEntities;
     uint32_t m_UpdateCount;
 
