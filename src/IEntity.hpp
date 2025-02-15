@@ -14,5 +14,5 @@ protected:
     virtual void update() = 0;
     virtual void destroy() = 0;
     virtual void draw(sf::RenderTarget&, sf::RenderStates) const = 0;
-    virtual bool isDestroyed() = 0;
+    virtual bool isDestroyed() const = 0;
 };

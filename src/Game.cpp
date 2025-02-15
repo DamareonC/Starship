@@ -1,11 +1,9 @@
 #include "Ship.hpp"
 #include "Spawner.hpp"
+#include "Score.hpp"
 #include "CollisionDetector.hpp"
 
-#include <iostream>
-
-inline unsigned int g_WindowWidth = 640, g_WindowHeight = 480;
-constexpr float g_UPDATES_PER_SECOND = 60.0f;
+inline unsigned int g_WindowWidth = 640, g_WindowHeight = 480; //Using unsigned int instead of uint32_t since SFML takes in unsigned int for Vector2u
 
 static void update(Ship& ship, Spawner& spawner)
 {
@@ -18,7 +16,7 @@ static void update(Ship& ship, Spawner& spawner)
     checkCollision(spawner.getFallingEntities(), ship);
 }
 
-static void render(sf::RenderWindow& window, const Ship& ship, Spawner& spawner)
+static void render(sf::RenderWindow& window, const Ship& ship, const Spawner& spawner)
 {
     window.clear();
 
@@ -35,12 +33,14 @@ void run()
 
     Ship ship;
     Spawner spawner;
+
+    readHighScore();
     
     int64_t lastTime, currentTime;
     const sf::Clock clock;
 
     lastTime = clock.getElapsedTime().asMicroseconds();
-    constexpr float usPerUpdate = 1000000.0f / g_UPDATES_PER_SECOND;
+    constexpr float usPerUpdate = 1000000.0f / 60.0f;
     float delta = 0.0f;
 
     while (window.isOpen())
@@ -79,5 +79,6 @@ void run()
         }
     }
 
-    std::printf("Final Score: %u\n", g_Score);
+    if (g_HighScore == 0 || g_HighScore < g_Score) //g_Score and g_HighScore are included from Score.hpp
+        saveHighScore();
 }

@@ -3,7 +3,7 @@
 #include "IFallingEntity.hpp"
 #include "Bullet.hpp"
 
-inline uint32_t g_Score = 0;
+//g_Score will be included from Score.hpp in Game.cpp
 
 void checkCollision(const std::vector<std::unique_ptr<IFallingEntity>>& fallingEntities, IEntity& entity)
 {

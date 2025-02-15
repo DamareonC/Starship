@@ -9,7 +9,7 @@ public:
     Ship();
     void update() override;
     void destroy() { m_Destroyed = true; };
-    bool isDestroyed() { return m_Destroyed; };
+    bool isDestroyed() const { return m_Destroyed; };
     sf::FloatRect getGlobalBounds() const override { return m_Sprite.getGlobalBounds(); };
     sf::Vector2f getPosition() const override { return m_Sprite.getPosition(); };
     std::vector<Bullet>& getBullets() { return m_Bullets; };

@@ -5,6 +5,7 @@
 #include <chrono>
 
 inline unsigned int g_WindowWidth, g_WindowHeight;
+inline uint32_t g_Score;
 
 Spawner::Spawner() :
     m_Mt(static_cast<std::mt19937::result_type>(std::chrono::steady_clock::now().time_since_epoch().count())),
@@ -31,9 +32,25 @@ void Spawner::update()
     }
     
     if (m_UpdateCount >= 60)
+    {
         m_UpdateCount = 0;
+        m_SecondCount++;
+        this->increaseSpeed();
+    }
     else
         m_UpdateCount++;
+}
+
+void Spawner::increaseSpeed()
+{
+    if (m_SecondCount == 5)
+    {
+        m_SecondCount = 0;
+        m_GlobalBaseSpeed = m_GlobalBaseSpeed + 0.01f;
+
+        if (g_Score != 0)
+            m_GlobalBaseSpeed = m_GlobalBaseSpeed + (g_Score / 10) * 0.01f;
+    }
 }
 
 void Spawner::spawnFallingEntity()
@@ -41,10 +58,10 @@ void Spawner::spawnFallingEntity()
     switch (m_FallingEntityType(m_Mt))
     {
         case 0:
-            m_FallingEntities.emplace_back(std::make_unique<Missle>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0f), 3.0f));
+            m_FallingEntities.emplace_back(std::make_unique<Missle>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0f), m_GlobalBaseSpeed));
             break;
         default:
-            m_FallingEntities.emplace_back(std::make_unique<Asteroid>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0f), 3.0f));
+            m_FallingEntities.emplace_back(std::make_unique<Asteroid>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0f), m_GlobalBaseSpeed));
             break;
     }
 }

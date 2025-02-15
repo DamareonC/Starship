@@ -14,8 +14,10 @@ private:
     std::mt19937 m_Mt;
     std::uniform_int_distribution<uint32_t> m_SpawnRange, m_FallingEntityType;
     std::vector<std::unique_ptr<IFallingEntity>> m_FallingEntities;
-    uint32_t m_UpdateCount;
+    uint32_t m_UpdateCount = 0, m_SecondCount = 0;
+    float m_GlobalBaseSpeed = 3.0f;
 
+    void increaseSpeed();
     void spawnFallingEntity();
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 };

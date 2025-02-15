@@ -1,5 +1,7 @@
 /build
 
+/res/high_score.dat
+
 /.idea
 /.vs
 /.vscode
