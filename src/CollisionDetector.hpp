@@ -5,7 +5,7 @@
 
 //g_Score will be included from Score.hpp in Game.cpp
 
-void checkCollision(const std::vector<std::unique_ptr<IFallingEntity>>& fallingEntities, IEntity& entity)
+static void checkCollision(const std::vector<std::unique_ptr<IFallingEntity>>& fallingEntities, IEntity& entity)
 {
     for (const std::unique_ptr<IFallingEntity>& fallingEntity : fallingEntities)
         if (fallingEntity->collidingWithEntity(entity))

@@ -13,8 +13,8 @@ public:
     sf::Vector2f getPosition() const override { return m_Bullet.getPosition(); }
 private:
     sf::RectangleShape m_Bullet;
-    float m_Size = 4.0f;
-    float m_Speed = 9.0f;
+    float m_Size = 4.0F;
+    float m_Speed = 9.0F;
     bool m_Destroyed = false;
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

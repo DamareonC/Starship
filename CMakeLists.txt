@@ -27,7 +27,7 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_SOURCE_DIR}/src/Spawner.cpp
 )
 
-set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${CMAKE_SOURCE_DIR})
+set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 

@@ -10,7 +10,7 @@ Asteroid::Asteroid(sf::Vector2f position, float speed) :
 
 void Asteroid::update()
 {
-    m_Sprite.move(sf::Vector2f(0.0f, m_Speed));
+    m_Sprite.move(sf::Vector2f(0.0F, m_Speed));
 }
 
 void Asteroid::draw(sf::RenderTarget &target, sf::RenderStates states) const

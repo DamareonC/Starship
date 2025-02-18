@@ -10,7 +10,7 @@ Missle::Missle(sf::Vector2f position, float speed) :
 
 void Missle::update()
 {
-    m_Sprite.move(sf::Vector2f(0.0f, m_Speed * 2.0f));
+    m_Sprite.move(sf::Vector2f(0.0F, m_Speed * 2.0F));
 }
 
 void Missle::draw(sf::RenderTarget &target, sf::RenderStates states) const

@@ -10,7 +10,7 @@ public:
     void destroy() override { m_Destroyed = true; };
     bool isDangerous() const override { return true; }
     bool isDestroyed() const override { return m_Destroyed; };
-    uint32_t getScore() const override { return 2; };
+    uint32_t getScore() const override { return 2U; };
     sf::FloatRect getGlobalBounds() const override { return m_Sprite.getGlobalBounds(); };
     sf::Vector2f getPosition() const override { return m_Sprite.getPosition(); };
 private:

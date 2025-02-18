@@ -17,8 +17,8 @@ private:
     static inline sf::Texture m_Texture = sf::Texture(std::filesystem::path("res/sprites/ship.png"));
     sf::Sprite m_Sprite;
     std::vector<Bullet> m_Bullets;
-    uint32_t m_CooldownUpdates = 0;
-    float m_Speed = 3.0f;
+    uint32_t m_CooldownUpdates = 0U;
+    float m_Speed = 3.0F;
     bool m_Destroyed = false;
 
     void updateBullets();

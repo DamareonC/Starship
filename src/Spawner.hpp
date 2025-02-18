@@ -14,8 +14,8 @@ private:
     std::mt19937 m_Mt;
     std::uniform_int_distribution<uint32_t> m_SpawnRange, m_FallingEntityType;
     std::vector<std::unique_ptr<IFallingEntity>> m_FallingEntities;
-    uint32_t m_UpdateCount = 0, m_SecondCount = 0;
-    float m_GlobalBaseSpeed = 3.0f;
+    uint32_t m_UpdateCount = 0U, m_SecondCount = 0U;
+    float m_GlobalBaseSpeed = 3.0F;
 
     void increaseSpeed();
     void spawnFallingEntity();
