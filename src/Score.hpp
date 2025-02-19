@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-static u_int32_t g_Score = 0U, g_HighScore = 0U;
+inline uint32_t g_Score = 0U, g_HighScore = 0U;
 
 static void readHighScore()
 {
@@ -29,8 +29,8 @@ static void saveHighScore()
 
 static void updateScores(sf::Text& scoreText, sf::Text& highScoreText)
 {
-    sf::String score(sf::String(std::string("Score: ").append(std::to_string(g_Score))));
-    sf::String highScore(sf::String(std::string("High Score: ").append(std::to_string(g_Score > g_HighScore ? g_Score : g_HighScore))));
+    sf::String score(sf::String(std::string("Score:").append(std::to_string(g_Score))));
+    sf::String highScore(sf::String(std::string("High Score:").append(std::to_string(g_Score > g_HighScore ? g_Score : g_HighScore))));
 
     scoreText.setString(score);
     highScoreText.setString(highScore);

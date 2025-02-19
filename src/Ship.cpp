@@ -3,7 +3,8 @@
 inline unsigned int g_WindowWidth, g_WindowHeight;
 
 Ship::Ship() :
-    m_Sprite(m_Texture)
+    m_Sprite(m_TEXTURE),
+    m_ShootSound(m_SHOOT_SOUND_BUFFER)
 {
     const sf::Vector2f spawnPoint = sf::Vector2f((g_WindowWidth / 2.0f) - m_Sprite.getTextureRect().size.x, g_WindowHeight - m_Sprite.getTextureRect().size.y * s_SCALE_FACTOR);
 
@@ -52,6 +53,7 @@ void Ship::updateBullets()
 void Ship::shoot()
 {
     m_Bullets.emplace_back(sf::Vector2f(m_Sprite.getPosition().x + (6.0F * s_SCALE_FACTOR), m_Sprite.getPosition().y - (3.0F * s_SCALE_FACTOR)));
+    m_ShootSound.play();
 }
 
 void Ship::draw(sf::RenderTarget& target, sf::RenderStates states) const

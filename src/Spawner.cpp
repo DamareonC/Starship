@@ -49,7 +49,7 @@ void Spawner::increaseSpeed()
         m_GlobalBaseSpeed = m_GlobalBaseSpeed + 0.01F;
 
         if (g_Score != 0U)
-            m_GlobalBaseSpeed = m_GlobalBaseSpeed + (g_Score / 10U) * 0.01F;
+            m_GlobalBaseSpeed = m_GlobalBaseSpeed + (g_Score / 10U) * 0.02F;
     }
 }
 
