@@ -8,7 +8,6 @@ inline unsigned int g_WindowWidth, g_WindowHeight;
 inline uint32_t g_Score;
 
 Spawner::Spawner() :
-    m_Mt(static_cast<std::mt19937::result_type>(std::chrono::steady_clock::now().time_since_epoch().count())),
     m_SpawnRange(0U, g_WindowWidth),
     m_FallingEntityType(0U, 9U)
 {
@@ -18,7 +17,7 @@ Spawner::Spawner() :
 void Spawner::update()
 {
     if (m_UpdateCount == 0U)
-        this->spawnFallingEntity();
+        spawnFallingEntity();
 
     if (m_FallingEntities.size() > 0U)
     {
@@ -35,7 +34,7 @@ void Spawner::update()
     {
         m_UpdateCount = 0U;
         m_SecondCount++;
-        this->increaseSpeed();
+        increaseSpeed();
     }
     else
         m_UpdateCount++;
@@ -49,7 +48,7 @@ void Spawner::increaseSpeed()
         m_GlobalBaseSpeed = m_GlobalBaseSpeed + 0.01F;
 
         if (g_Score != 0U)
-            m_GlobalBaseSpeed = m_GlobalBaseSpeed + (g_Score / 10U) * 0.02F;
+            m_GlobalBaseSpeed += (g_Score / 10U) * 0.02F;
     }
 }
 

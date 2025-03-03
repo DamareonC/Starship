@@ -16,7 +16,7 @@ static void checkCollision(const std::vector<std::unique_ptr<IFallingEntity>>& f
             {
                 fallingEntity->destroy();
                 bullet->destroy();
-                g_Score = g_Score + fallingEntity->getScore();
+                g_Score += fallingEntity->getScore();
             }
 
             Ship* ship = dynamic_cast<Ship*>(&entity);

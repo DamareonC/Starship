@@ -1,6 +1,6 @@
 # Linux Dependencies
 
-For Arch-bases distros (e.g. Arch Linux, Manjaro, Artix), run:
+For Arch-based distros (e.g. Arch Linux, Manjaro, Artix), run:
 1. `sudo pacman -S libxrandr libxcursor libxi mesa mesa-utils libgudev freetype2 libvorbis flac`
 
 For Debian-based distros (e.g. Debian, Ubuntu, Linux Mint), run:

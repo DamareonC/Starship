@@ -2,7 +2,8 @@
 
 #include <fstream>
 
-inline uint32_t g_Score = 0U, g_HighScore = 0U;
+inline uint32_t g_Score = 0U;
+static uint32_t g_HighScore = 0U;
 
 static void readHighScore()
 {

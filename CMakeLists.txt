@@ -24,6 +24,7 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_SOURCE_DIR}/src/Main.cpp
     ${CMAKE_SOURCE_DIR}/src/Missle.cpp
     ${CMAKE_SOURCE_DIR}/src/Ship.cpp
+    ${CMAKE_SOURCE_DIR}/src/StartMenu.cpp
     ${CMAKE_SOURCE_DIR}/src/Spawner.cpp
 )
 

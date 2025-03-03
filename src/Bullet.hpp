@@ -7,7 +7,7 @@ class Bullet : public IEntity
 public:
     Bullet(sf::Vector2f position);
     void update() override;
-    void destroy() { m_Destroyed = true; };
+    void destroy() override { m_Destroyed = true; };
     bool isDestroyed() const { return m_Destroyed; };
     sf::FloatRect getGlobalBounds() const override { return m_Bullet.getGlobalBounds(); };
     sf::Vector2f getPosition() const override { return m_Bullet.getPosition(); }

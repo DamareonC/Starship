@@ -12,7 +12,7 @@ public:
     virtual void destroy() { s_DestroySound.play(); };
     virtual bool isDangerous() const = 0;
     virtual bool isDestroyed() const = 0;
-    bool collidingWithEntity(const IEntity& entity) const { return this->getGlobalBounds().findIntersection(entity.getGlobalBounds()).has_value(); };
+    bool collidingWithEntity(const IEntity& entity) const { return getGlobalBounds().findIntersection(entity.getGlobalBounds()).has_value(); };
     virtual uint32_t getScore() const = 0;
     virtual sf::FloatRect getGlobalBounds() const = 0;
     virtual sf::Vector2f getPosition() const = 0;

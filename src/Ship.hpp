@@ -10,11 +10,11 @@ class Ship : public IEntity
 public:
     Ship();
     void update() override;
-    void destroy() { m_Destroyed = true; };
-    bool isDestroyed() const { return m_Destroyed; };
+    void destroy() override { m_Destroyed = true; };
+    bool isDestroyed() const override { return m_Destroyed; };
+    std::vector<Bullet>& getBullets() { return m_Bullets; };
     sf::FloatRect getGlobalBounds() const override { return m_Sprite.getGlobalBounds(); };
     sf::Vector2f getPosition() const override { return m_Sprite.getPosition(); };
-    std::vector<Bullet>& getBullets() { return m_Bullets; };
 private:
     const sf::Texture m_TEXTURE = sf::Texture(std::filesystem::path("res/sprites/ship.png"));
     const sf::SoundBuffer m_SHOOT_SOUND_BUFFER = sf::SoundBuffer(std::filesystem::path("res/sounds/shoot.ogg"));

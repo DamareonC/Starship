@@ -36,7 +36,7 @@ void Ship::update()
         m_CooldownUpdates = 20U;
     }
 
-    this->updateBullets();
+    updateBullets();
 }
 
 void Ship::updateBullets()
@@ -59,7 +59,7 @@ void Ship::shoot()
 void Ship::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(m_Sprite, states);
-    this->drawBullets(target, states);
+    drawBullets(target, states);
 }
 
 void Ship::drawBullets(sf::RenderTarget& target, sf::RenderStates states) const

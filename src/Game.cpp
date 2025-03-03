@@ -5,6 +5,9 @@ void run()
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(g_WindowWidth, g_WindowHeight)), sf::String("Starship"), sf::Style::Close);
     window.setPosition(sf::Vector2i(window.getPosition().x / 2, window.getPosition().y / 2));
 
+    Screen screen = Screen::START_MENU;
+    StartMenu startMenu;
+
     Ship ship;
     Spawner spawner;
     
@@ -17,24 +20,42 @@ void run()
     int64_t lastTime, currentTime;
     const sf::Clock clock;
 
-    lastTime = clock.getElapsedTime().asMicroseconds();
+    lastTime = 0U;
     constexpr float usPerUpdate = 1000000.0F / 60.0F;
     float delta = 0.0F;
 
     while (window.isOpen())
     {
-        currentTime = clock.getElapsedTime().asMicroseconds();
-        delta += (currentTime - lastTime) / usPerUpdate;
-        lastTime = currentTime;
-
-        while (delta >= 1.0F)
+        switch (screen)
         {
-            update(ship, spawner, scoreText, highScoreText);
-            delta--;
+            case Screen::START_MENU:
+                renderStartMenu(window, startMenu);
+                break;
+            case Screen::GAME:
+                currentTime = clock.getElapsedTime().asMicroseconds();
+
+                if (lastTime != 0U)
+                    delta += (currentTime - lastTime) / usPerUpdate;
+                
+                lastTime = currentTime;
+
+                while (delta >= 1.0F)
+                {
+                    update(ship, spawner, scoreText, highScoreText);
+                    delta--;
+                }
+                
+                renderGame(window, ship, spawner, scoreText, highScoreText);
+                break;
+            case Screen::GAME_OVER:
+                renderGameOver();
+                break;
+            default:
+                window.close();
+                break;
         }
 
-        render(window, ship, spawner, scoreText, highScoreText);
-        events(window);
+        events(window, screen, startMenu);
 
         if (ship.isDestroyed())
             window.close();
