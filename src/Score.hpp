@@ -30,8 +30,8 @@ static void saveHighScore()
 
 static void updateScores(sf::Text& scoreText, sf::Text& highScoreText)
 {
-    sf::String score(sf::String(std::string("Score:").append(std::to_string(g_Score))));
-    sf::String highScore(sf::String(std::string("High Score:").append(std::to_string(g_Score > g_HighScore ? g_Score : g_HighScore))));
+    sf::String score(sf::String(std::string("Score: ").append(std::to_string(g_Score))));
+    sf::String highScore(sf::String(std::string("High Score: ").append(std::to_string(g_Score > g_HighScore ? g_Score : g_HighScore))));
 
     scoreText.setString(score);
     highScoreText.setString(highScore);

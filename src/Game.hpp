@@ -46,7 +46,7 @@ static void renderGameOver()
 
 }
 
-static void events(sf::RenderWindow& window, Screen& screen, StartMenu startMenu)
+static void events(sf::RenderWindow& window, Screen& screen, const StartMenu& startMenu)
 {
     while (const std::optional<sf::Event> event = window.pollEvent())
     {

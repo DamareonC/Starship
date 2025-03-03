@@ -14,7 +14,7 @@ StartMenu::StartMenu() :
     m_Quit.setPosition(sf::Vector2f((g_WindowWidth / 2.0F) - (m_Quit.getGlobalBounds().size.x / 2.0F), g_WindowHeight * 0.6F));
 }
 
-Screen StartMenu::onClick(sf::Vector2f clickPosition)
+Screen StartMenu::onClick(sf::Vector2f clickPosition) const
 {
     if (m_Start.getGlobalBounds().contains(clickPosition))
         return Screen::GAME;

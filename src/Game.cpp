@@ -11,7 +11,7 @@ void run()
     Ship ship;
     Spawner spawner;
     
-    const sf::Font font(std::filesystem::path("res/fonts/courier.ttf"));
+    const sf::Font font(std::filesystem::path("res/fonts/architext.ttf"));
     sf::Text scoreText(font), highScoreText(font);
     highScoreText.setPosition(sf::Vector2f(0.0F, 32.0F));
 
@@ -31,6 +31,7 @@ void run()
             case Screen::START_MENU:
                 renderStartMenu(window, startMenu);
                 break;
+            
             case Screen::GAME:
                 currentTime = clock.getElapsedTime().asMicroseconds();
 
@@ -47,9 +48,11 @@ void run()
                 
                 renderGame(window, ship, spawner, scoreText, highScoreText);
                 break;
+            
             case Screen::GAME_OVER:
                 renderGameOver();
                 break;
+            
             default:
                 window.close();
                 break;
