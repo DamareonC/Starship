@@ -8,7 +8,7 @@ inline unsigned int g_WindowWidth, g_WindowHeight;
 inline uint32_t g_Score;
 
 Spawner::Spawner() :
-    m_SpawnRange(0U, g_WindowWidth),
+    m_SpawnRange(0U, g_WindowWidth - 32U),
     m_FallingEntityType(0U, 9U)
 {
     m_FallingEntities.reserve(20U);
@@ -63,6 +63,14 @@ void Spawner::spawnFallingEntity()
             m_FallingEntities.emplace_back(std::make_unique<Asteroid>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0F), m_GlobalBaseSpeed));
             break;
     }
+}
+
+void Spawner::reset()
+{
+    m_UpdateCount = m_SecondCount = 0U;
+    m_GlobalBaseSpeed = 3.0F;
+
+    m_FallingEntities.clear();
 }
 
 void Spawner::draw(sf::RenderTarget& target, sf::RenderStates states) const

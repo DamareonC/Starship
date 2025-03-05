@@ -2,14 +2,14 @@
 
 #include "IMenu.hpp"
 
-class StartMenu : public IMenu
+class GameOver : public IMenu
 {
 public:
-    StartMenu();
-    Screen onClick(sf::Vector2f clickPosition) const override;
+    GameOver();
+    Screen onClick(sf::Vector2f clickPosition) const;
     void onHover(sf::Vector2f mousePosition) override;
 private:
-    sf::Text m_Title, m_Start, m_Quit;
+    sf::Text m_Title, m_Restart, m_Quit;
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 };

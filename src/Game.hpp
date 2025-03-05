@@ -5,10 +5,11 @@
 #include "Score.hpp"
 #include "CollisionDetector.hpp"
 #include "StartMenu.hpp"
+#include "GameOver.hpp"
 
 inline unsigned int g_WindowWidth = 640U, g_WindowHeight = 480U; //Using unsigned int instead of uint32_t since SFML takes in unsigned int for Vector2u
 
-static void update(Ship& ship, Spawner& spawner, sf::Text& scoreText, sf::Text& highScoreText)
+static void update(Ship& ship, Screen& screen, Spawner& spawner, sf::Text& scoreText, sf::Text& highScoreText)
 {
     ship.update();
     spawner.update();
@@ -18,6 +19,15 @@ static void update(Ship& ship, Spawner& spawner, sf::Text& scoreText, sf::Text& 
 
     checkCollision(spawner.getFallingEntities(), ship);
     updateScores(scoreText, highScoreText);
+
+    if (ship.isDestroyed())
+    {
+        screen = Screen::GAME_OVER;
+        g_Score = 0;
+
+        ship.reset();
+        spawner.reset();
+    }
 }
 
 static void renderStartMenu(sf::RenderWindow& window, const StartMenu& startMenu)
@@ -41,12 +51,16 @@ static void renderGame(sf::RenderWindow& window, const Ship& ship, const Spawner
     window.display();
 }
 
-static void renderGameOver()
+static void renderGameOver(sf::RenderWindow& window, const GameOver& gameOver)
 {
+    window.clear();
 
+    window.draw(gameOver);
+
+    window.display();
 }
 
-static void events(sf::RenderWindow& window, Screen& screen, const StartMenu& startMenu)
+static void events(sf::RenderWindow& window, Screen& screen, StartMenu& startMenu, GameOver& gameOver)
 {
     while (const std::optional<sf::Event> event = window.pollEvent())
     {
@@ -64,7 +78,19 @@ static void events(sf::RenderWindow& window, Screen& screen, const StartMenu& st
         if (const sf::Event::MouseButtonPressed* mouseButtonPressed = event->getIf<sf::Event::MouseButtonPressed>())
         {
             if (mouseButtonPressed->button == sf::Mouse::Button::Left)
-                screen = startMenu.onClick(sf::Vector2f(mouseButtonPressed->position.x, mouseButtonPressed->position.y));
+            {
+                if (screen == Screen::START_MENU)
+                    screen = startMenu.onClick(sf::Vector2f(mouseButtonPressed->position.x, mouseButtonPressed->position.y));
+                else if (screen == Screen::GAME_OVER)
+                    screen = gameOver.onClick(sf::Vector2f(mouseButtonPressed->position.x, mouseButtonPressed->position.y));
+            }
+        }
+        if (const sf::Event::MouseMoved* mouseMoved = event->getIf<sf::Event::MouseMoved>())
+        {
+            if (screen == Screen::START_MENU)
+                startMenu.onHover(sf::Vector2f(mouseMoved->position.x, mouseMoved->position.y));
+            else if (screen == Screen::GAME_OVER)
+                gameOver.onHover(sf::Vector2f(mouseMoved->position.x, mouseMoved->position.y));
         }
     }
 }

@@ -56,6 +56,19 @@ void Ship::shoot()
     m_ShootSound.play();
 }
 
+void Ship::reset()
+{
+    m_CooldownUpdates = 0U;
+    m_Speed = 3.0F;
+    m_Destroyed = false;
+
+    const sf::Vector2f spawnPoint = sf::Vector2f((g_WindowWidth / 2.0f) - m_Sprite.getTextureRect().size.x, g_WindowHeight - m_Sprite.getTextureRect().size.y * s_SCALE_FACTOR);
+
+    m_Sprite.setPosition(spawnPoint);
+    m_ShootSound.stop();
+    m_Bullets.clear();
+}
+
 void Ship::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(m_Sprite, states);

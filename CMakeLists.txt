@@ -21,6 +21,7 @@ add_executable(${PROJECT_NAME}
     ${CMAKE_SOURCE_DIR}/src/Asteroid.cpp
     ${CMAKE_SOURCE_DIR}/src/Bullet.cpp
     ${CMAKE_SOURCE_DIR}/src/Game.cpp
+    ${CMAKE_SOURCE_DIR}/src/GameOver.cpp
     ${CMAKE_SOURCE_DIR}/src/Main.cpp
     ${CMAKE_SOURCE_DIR}/src/Missle.cpp
     ${CMAKE_SOURCE_DIR}/src/Ship.cpp

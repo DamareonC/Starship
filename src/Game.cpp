@@ -1,5 +1,7 @@
 #include "Game.hpp"
 
+inline const sf::Font g_FONT(std::filesystem::path("res/fonts/architext.ttf"));
+
 void run()
 {
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(g_WindowWidth, g_WindowHeight)), sf::String("Starship"), sf::Style::Close);
@@ -7,12 +9,12 @@ void run()
 
     Screen screen = Screen::START_MENU;
     StartMenu startMenu;
+    GameOver gameOver;
 
     Ship ship;
     Spawner spawner;
     
-    const sf::Font font(std::filesystem::path("res/fonts/architext.ttf"));
-    sf::Text scoreText(font), highScoreText(font);
+    sf::Text scoreText(g_FONT), highScoreText(g_FONT);
     highScoreText.setPosition(sf::Vector2f(0.0F, 32.0F));
 
     readHighScore();
@@ -33,6 +35,8 @@ void run()
                 break;
             
             case Screen::GAME:
+                renderGame(window, ship, spawner, scoreText, highScoreText);
+
                 currentTime = clock.getElapsedTime().asMicroseconds();
 
                 if (lastTime != 0U)
@@ -42,15 +46,16 @@ void run()
 
                 while (delta >= 1.0F)
                 {
-                    update(ship, spawner, scoreText, highScoreText);
+                    update(ship, screen, spawner, scoreText, highScoreText);
                     delta--;
                 }
                 
-                renderGame(window, ship, spawner, scoreText, highScoreText);
                 break;
             
             case Screen::GAME_OVER:
-                renderGameOver();
+                lastTime = 0U;
+                delta = 0.0F;
+                renderGameOver(window, gameOver);
                 break;
             
             default:
@@ -58,10 +63,7 @@ void run()
                 break;
         }
 
-        events(window, screen, startMenu);
-
-        if (ship.isDestroyed())
-            window.close();
+        events(window, screen, startMenu, gameOver);
     }
 
     if (g_HighScore == 0U || g_HighScore < g_Score) //g_Score and g_HighScore are included from Score.hpp

@@ -10,6 +10,7 @@ class Ship : public IEntity
 public:
     Ship();
     void update() override;
+    void reset();
     void destroy() override { m_Destroyed = true; };
     bool isDestroyed() const override { return m_Destroyed; };
     std::vector<Bullet>& getBullets() { return m_Bullets; };
