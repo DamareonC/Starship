@@ -1,6 +1,8 @@
 # Starship
 
-Game is made with C++ and [SFML](https://www.sfml-dev.org/).
+Starship is a [Space Invaders](https://en.wikipedia.org/wiki/Space_Invaders)-esque game made with C++ and [SFML](https://www.sfml-dev.org/). In the game, you play as a ship, and your goal is to shoot as many enemies (asteroids and missles) as possible. The enemies become faster as time goes on and as you destroy more and more of them. If you get hit, it is game over.
+
+Move around with the WASD keys, and shoot with Space.
 
 ## Prerequisites
 
