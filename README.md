@@ -12,7 +12,7 @@ Make sure you have:
 
 ### Linux
 
-For Linux users, SFML requires dependencies to be installed (SFML already comes with these dependences on Windows and macOS). Go to [LINUX.md](./docs/LINUX.md) to see what packages to install.
+For Linux users, SFML requires dependencies to be installed (SFML already comes with these dependencies on Windows and macOS). Go to [LINUX.md](./docs/LINUX.md) to see what packages to install.
 
 ## Building Starship
 
@@ -35,4 +35,4 @@ If the default generator uses a single build configuration (such as Makefile or 
 
 If the default generator uses multiple build configurations (such as Visual Studio, Xcode, or Ninja Multi-Config), the executable is in `build/bin/<config>`, where `<config>` is either `Debug`, `Release`, `RelWithDebInfo`, or `MinSizeRel` (depending on your default configuration).
 
-Of course, for Visual Studio and Xcode, Starship can ran in the IDE as well.
+Of course, for Visual Studio and Xcode, Starship can be ran in the IDE as well.

@@ -16,8 +16,6 @@ void run()
     
     sf::Text scoreText(g_FONT), highScoreText(g_FONT);
     highScoreText.setPosition(sf::Vector2f(0.0F, 32.0F));
-
-    readHighScore();
     
     int64_t lastTime, currentTime;
     const sf::Clock clock;
@@ -35,8 +33,6 @@ void run()
                 break;
             
             case Screen::GAME:
-                renderGame(window, ship, spawner, scoreText, highScoreText);
-
                 currentTime = clock.getElapsedTime().asMicroseconds();
 
                 if (lastTime != 0U)
@@ -49,6 +45,8 @@ void run()
                     update(ship, screen, spawner, scoreText, highScoreText);
                     delta--;
                 }
+
+                renderGame(window, ship, spawner, scoreText, highScoreText);
                 
                 break;
             
@@ -65,7 +63,4 @@ void run()
 
         events(window, screen, startMenu, gameOver);
     }
-
-    if (g_HighScore == 0U || g_HighScore < g_Score) //g_Score and g_HighScore are included from Score.hpp
-        saveHighScore();
 }

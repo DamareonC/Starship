@@ -23,6 +23,10 @@ static void update(Ship& ship, Screen& screen, Spawner& spawner, sf::Text& score
     if (ship.isDestroyed())
     {
         screen = Screen::GAME_OVER;
+
+        if (g_HighScore == 0U || g_HighScore < g_Score) //g_Score and g_HighScore are included from Score.hpp
+            saveHighScore();
+
         g_Score = 0;
 
         ship.reset();
@@ -83,6 +87,9 @@ static void events(sf::RenderWindow& window, Screen& screen, StartMenu& startMen
                     screen = startMenu.onClick(sf::Vector2f(mouseButtonPressed->position.x, mouseButtonPressed->position.y));
                 else if (screen == Screen::GAME_OVER)
                     screen = gameOver.onClick(sf::Vector2f(mouseButtonPressed->position.x, mouseButtonPressed->position.y));
+
+                if (screen == Screen::GAME)
+                    readHighScore();
             }
         }
         if (const sf::Event::MouseMoved* mouseMoved = event->getIf<sf::Event::MouseMoved>())
