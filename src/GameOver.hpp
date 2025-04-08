@@ -6,8 +6,8 @@ class GameOver : public IMenu
 {
 public:
     GameOver();
-    Screen onClick(sf::Vector2f clickPosition) const;
-    void onHover(sf::Vector2f mousePosition) override;
+    Screen onClick(const sf::Vector2f clickPosition) const;
+    void onHover(const sf::Vector2f mousePosition) override;
 private:
     sf::Text m_Title, m_Restart, m_Quit;
 

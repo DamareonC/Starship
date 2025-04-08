@@ -16,27 +16,41 @@ GameOver::GameOver() :
     m_Quit.setPosition(sf::Vector2f((g_WindowWidth / 2.0F) - (m_Quit.getGlobalBounds().size.x / 2.0F), g_WindowHeight * 0.6F));
 }
 
-Screen GameOver::onClick(sf::Vector2f clickPosition) const
+Screen GameOver::onClick(const sf::Vector2f clickPosition) const
 {
     if (m_Restart.getGlobalBounds().contains(clickPosition))
+    {
         return Screen::GAME;
+    }
     else if (m_Quit.getGlobalBounds().contains(clickPosition))
+    {
         return Screen::QUIT;
+    }
     else
+    {
         return Screen::GAME_OVER;
+    }
 }
 
-void GameOver::onHover(sf::Vector2f mousePosition)
+void GameOver::onHover(const sf::Vector2f mousePosition)
 {
     if (m_Restart.getGlobalBounds().contains(mousePosition))
+    {
         m_Restart.setFillColor(sf::Color(255U, 255U, 0U));
+    }
     else
+    {
         m_Restart.setFillColor(sf::Color(255U, 255U, 255U));
+    }
 
     if (m_Quit.getGlobalBounds().contains(mousePosition))
+    {
         m_Quit.setFillColor(sf::Color(255U, 255U, 0U));
+    }
     else
+    {
         m_Quit.setFillColor(sf::Color(255U, 0U, 0U));
+    }
 }
 
 void GameOver::draw(sf::RenderTarget &target, sf::RenderStates states) const

@@ -1,6 +1,9 @@
 #include "Spawner.hpp"
 #include "Asteroid.hpp"
 #include "Missle.hpp"
+#include "DoubleShot.hpp"
+#include "Shield.hpp"
+#include "SpeedBoost.hpp"
 
 #include <chrono>
 
@@ -9,7 +12,9 @@ inline uint32_t g_Score;
 
 Spawner::Spawner() :
     m_SpawnRange(0U, g_WindowWidth - 32U),
-    m_FallingEntityType(0U, 9U)
+    m_FallingEntityType(0U, 19U),
+    m_EnemyType(0U, 9U),
+    m_PowerUpType(0U, 2U)
 {
     m_FallingEntities.reserve(20U);
 }
@@ -17,7 +22,9 @@ Spawner::Spawner() :
 void Spawner::update()
 {
     if (m_UpdateCount == 0U)
+    {
         spawnFallingEntity();
+    }
 
     if (m_FallingEntities.size() > 0U)
     {
@@ -26,7 +33,9 @@ void Spawner::update()
             m_FallingEntities[i]->update();
 
             if (m_FallingEntities[i]->getPosition().y > g_WindowHeight || m_FallingEntities[i]->isDestroyed())
+            {
                 m_FallingEntities.erase(m_FallingEntities.begin() + i);
+            }
         }
     }
     
@@ -37,7 +46,9 @@ void Spawner::update()
         increaseSpeed();
     }
     else
+    {
         m_UpdateCount++;
+    }
 }
 
 void Spawner::increaseSpeed()
@@ -48,7 +59,9 @@ void Spawner::increaseSpeed()
         m_GlobalBaseSpeed = m_GlobalBaseSpeed + 0.01F;
 
         if (g_Score != 0U)
+        {
             m_GlobalBaseSpeed += (g_Score / 10U) * 0.02F;
+        }
     }
 }
 
@@ -56,11 +69,30 @@ void Spawner::spawnFallingEntity()
 {
     switch (m_FallingEntityType(m_Mt))
     {
-        case 0:
-            m_FallingEntities.emplace_back(std::make_unique<Missle>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0F), m_GlobalBaseSpeed));
+        case 0U:
+            switch (m_PowerUpType(m_Mt))
+            {
+                case 0U:
+                    m_FallingEntities.emplace_back(std::make_unique<DoubleShot>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0F)));
+                    break;
+                case 1U:
+                    m_FallingEntities.emplace_back(std::make_unique<Shield>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0F)));
+                    break;
+                case 2U:
+                    m_FallingEntities.emplace_back(std::make_unique<SpeedBoost>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0F)));
+                    break;
+            }
             break;
         default:
-            m_FallingEntities.emplace_back(std::make_unique<Asteroid>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0F), m_GlobalBaseSpeed));
+            switch (m_EnemyType(m_Mt))
+            {
+                case 0U:
+                    m_FallingEntities.emplace_back(std::make_unique<Missle>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0F), m_GlobalBaseSpeed));
+                    break;
+                default:
+                    m_FallingEntities.emplace_back(std::make_unique<Asteroid>(sf::Vector2f(m_SpawnRange(m_Mt), -32.0F), m_GlobalBaseSpeed));
+                    break;
+            }
             break;
     }
 }
@@ -76,5 +108,7 @@ void Spawner::reset()
 void Spawner::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     for (const std::unique_ptr<IFallingEntity>& fallingEntity : m_FallingEntities)
+    {
         target.draw(*fallingEntity, states);
+    }
 }

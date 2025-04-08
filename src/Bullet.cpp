@@ -1,6 +1,6 @@
 #include "Bullet.hpp"
 
-Bullet::Bullet(sf::Vector2f position)
+Bullet::Bullet(const sf::Vector2f position)
 {
     m_Bullet.setSize(sf::Vector2f(m_Size, m_Size));
     m_Bullet.scale(sf::Vector2f(s_SCALE_FACTOR, s_SCALE_FACTOR));

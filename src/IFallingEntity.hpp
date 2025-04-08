@@ -10,7 +10,7 @@ public:
     virtual ~IFallingEntity() = default;
     virtual void update() = 0;
     virtual void destroy() { s_DestroySound.play(); };
-    virtual bool isDangerous() const = 0;
+    virtual bool isEnemy() const = 0;
     virtual bool isDestroyed() const = 0;
     bool collidingWithEntity(const IEntity& entity) const { return getGlobalBounds().findIntersection(entity.getGlobalBounds()).has_value(); };
     virtual uint32_t getScore() const = 0;

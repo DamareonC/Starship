@@ -1,22 +1,20 @@
 #pragma once
 
-#include "IFallingEntity.hpp"
+#include "IPowerUp.hpp"
 
-class Missle : public IFallingEntity
+class DoubleShot : public IPowerUp
 {
 public:
-    Missle(const sf::Vector2f position, const float speed);
+    DoubleShot(const sf::Vector2f position);
     void update() override;
     void destroy() override;
-    bool isEnemy() const override { return true; }
+    PowerUp givePowerUp() const override { return PowerUp::DOUBLE_SHOT; };
     bool isDestroyed() const override { return m_Destroyed; };
-    uint32_t getScore() const override { return 2U; };
     sf::FloatRect getGlobalBounds() const override { return m_Sprite.getGlobalBounds(); };
     sf::Vector2f getPosition() const override { return m_Sprite.getPosition(); };
 private:
-    static inline const sf::Texture m_Texture = sf::Texture(std::filesystem::path("res/sprites/missle.png"));
+    static inline const sf::Texture m_Texture = sf::Texture(std::filesystem::path("res/sprites/double_shot.png"));
     sf::Sprite m_Sprite;
-    float m_Speed;
     bool m_Destroyed = false;
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

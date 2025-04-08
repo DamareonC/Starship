@@ -6,8 +6,8 @@ class StartMenu : public IMenu
 {
 public:
     StartMenu();
-    Screen onClick(sf::Vector2f clickPosition) const override;
-    void onHover(sf::Vector2f mousePosition) override;
+    Screen onClick(const sf::Vector2f clickPosition) const override;
+    void onHover(const sf::Vector2f mousePosition) override;
 private:
     sf::Text m_Title, m_Start, m_Quit;
 

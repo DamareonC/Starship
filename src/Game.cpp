@@ -5,7 +5,7 @@ inline const sf::Font g_FONT(std::filesystem::path("res/fonts/architext.ttf"));
 void run()
 {
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(g_WindowWidth, g_WindowHeight)), sf::String("Starship"), sf::Style::Close);
-    window.setPosition(sf::Vector2i(window.getPosition().x / 2, window.getPosition().y / 2));
+    window.setIcon(sf::Image(std::filesystem::path("res/sprites/ship.png")));
 
     Screen screen = Screen::START_MENU;
     StartMenu startMenu;
@@ -31,31 +31,30 @@ void run()
                 delta = 0.0F;
                 renderStartMenu(window, startMenu);
                 break;
-            
             case Screen::GAME:
                 currentTime = clock.getElapsedTime().asMicroseconds();
 
                 if (lastTime != 0U)
+                {
                     delta += (currentTime - lastTime) / usPerUpdate;
+                }
                 
                 lastTime = currentTime;
 
                 while (delta >= 1.0F)
                 {
-                    update(ship, screen, spawner, scoreText, highScoreText);
+                    update(ship, spawner, scoreText, highScoreText, screen);
                     delta--;
                 }
 
                 renderGame(window, ship, spawner, scoreText, highScoreText);
                 
                 break;
-            
             case Screen::GAME_OVER:
                 lastTime = 0U;
                 delta = 0.0F;
                 renderGameOver(window, gameOver);
                 break;
-            
             default:
                 window.close();
                 break;

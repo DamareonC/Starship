@@ -15,27 +15,41 @@ StartMenu::StartMenu() :
     m_Quit.setPosition(sf::Vector2f((g_WindowWidth / 2.0F) - (m_Quit.getGlobalBounds().size.x / 2.0F), g_WindowHeight * 0.6F));
 }
 
-Screen StartMenu::onClick(sf::Vector2f clickPosition) const
+Screen StartMenu::onClick(const sf::Vector2f clickPosition) const
 {
     if (m_Start.getGlobalBounds().contains(clickPosition))
+    {
         return Screen::GAME;
+    }
     else if (m_Quit.getGlobalBounds().contains(clickPosition))
+    {
         return Screen::QUIT;
+    }
     else
+    {
         return Screen::START_MENU;
+    }
 }
 
-void StartMenu::onHover(sf::Vector2f mousePosition)
+void StartMenu::onHover(const sf::Vector2f mousePosition)
 {
     if (m_Start.getGlobalBounds().contains(mousePosition))
+    {
         m_Start.setFillColor(sf::Color(255U, 255U, 0U));
+    }
     else
+    {
         m_Start.setFillColor(sf::Color(255U, 255U, 255U));
+    }
 
     if (m_Quit.getGlobalBounds().contains(mousePosition))
+    {
         m_Quit.setFillColor(sf::Color(255U, 255U, 0U));
+    }
     else
+    {
         m_Quit.setFillColor(sf::Color(255U, 0U, 0U));
+    }
 }
 
 void StartMenu::draw(sf::RenderTarget &target, sf::RenderStates states) const

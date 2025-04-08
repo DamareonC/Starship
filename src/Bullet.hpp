@@ -5,7 +5,7 @@
 class Bullet : public IEntity
 {
 public:
-    Bullet(sf::Vector2f position);
+    Bullet(const sf::Vector2f position);
     void update() override;
     void destroy() override { m_Destroyed = true; };
     bool isDestroyed() const { return m_Destroyed; };

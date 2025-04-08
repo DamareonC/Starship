@@ -20,13 +20,16 @@ FetchContent_MakeAvailable(SFML)
 add_executable(${PROJECT_NAME}
     ${CMAKE_SOURCE_DIR}/src/Asteroid.cpp
     ${CMAKE_SOURCE_DIR}/src/Bullet.cpp
+    ${CMAKE_SOURCE_DIR}/src/DoubleShot.cpp
     ${CMAKE_SOURCE_DIR}/src/Game.cpp
     ${CMAKE_SOURCE_DIR}/src/GameOver.cpp
     ${CMAKE_SOURCE_DIR}/src/Main.cpp
     ${CMAKE_SOURCE_DIR}/src/Missle.cpp
+    ${CMAKE_SOURCE_DIR}/src/Shield.cpp
     ${CMAKE_SOURCE_DIR}/src/Ship.cpp
-    ${CMAKE_SOURCE_DIR}/src/StartMenu.cpp
     ${CMAKE_SOURCE_DIR}/src/Spawner.cpp
+    ${CMAKE_SOURCE_DIR}/src/SpeedBoost.cpp
+    ${CMAKE_SOURCE_DIR}/src/StartMenu.cpp
 )
 
 set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})

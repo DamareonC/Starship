@@ -5,10 +5,10 @@
 class Asteroid : public IFallingEntity
 {
 public:
-    Asteroid(sf::Vector2f position, float speed);
+    Asteroid(const sf::Vector2f position, const float speed);
     void update() override;
-    void destroy() override { IFallingEntity::destroy(); m_Destroyed = true; };
-    bool isDangerous() const override { return true; };
+    void destroy() override;
+    bool isEnemy() const override { return true; };
     bool isDestroyed() const override { return m_Destroyed; };
     uint32_t getScore() const override { return 1; };
     sf::FloatRect getGlobalBounds() const override { return m_Sprite.getGlobalBounds(); };
