@@ -10,6 +10,7 @@ public:
     Spawner();
     void update();
     void reset();
+    void setSpawnRange();
     const std::vector<std::unique_ptr<IFallingEntity>>& getFallingEntities() const { return m_FallingEntities; };
 private:
     std::mt19937 m_Mt = std::mt19937(static_cast<std::mt19937::result_type>(std::chrono::steady_clock::now().time_since_epoch().count()));

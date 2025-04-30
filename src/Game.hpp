@@ -68,7 +68,7 @@ static void renderGameOver(sf::RenderWindow& window, const GameOver& gameOver)
     window.display();
 }
 
-static void events(sf::RenderWindow& window, Screen& screen, StartMenu& startMenu, GameOver& gameOver)
+static void events(sf::RenderWindow& window, Screen& screen, StartMenu& startMenu, GameOver& gameOver, Spawner& spawner)
 {
     while (const std::optional<sf::Event> event = window.pollEvent())
     {
@@ -81,7 +81,12 @@ static void events(sf::RenderWindow& window, Screen& screen, StartMenu& startMen
         {
             sf::FloatRect visibleArea(sf::Vector2f(0.0F, 0.0F), sf::Vector2f(window.getSize().x, window.getSize().y));
             window.setView(sf::View(visibleArea));
+
             g_WindowWidth = window.getSize().x, g_WindowHeight = window.getSize().y;
+
+            startMenu.setMenuPosition();
+            gameOver.setMenuPosition();
+            spawner.setSpawnRange();
         }
         if (const sf::Event::MouseButtonPressed* mouseButtonPressed = event->getIf<sf::Event::MouseButtonPressed>())
         {

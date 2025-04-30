@@ -53,6 +53,13 @@ void GameOver::onHover(const sf::Vector2f mousePosition)
     }
 }
 
+void GameOver::setMenuPosition()
+{
+    m_Title.setPosition(sf::Vector2f((g_WindowWidth / 2.0F) - (m_Title.getGlobalBounds().size.x / 2.0F), g_WindowHeight * 0.1F));
+    m_Restart.setPosition(sf::Vector2f((g_WindowWidth / 2.0F) - (m_Restart.getGlobalBounds().size.x / 2.0F), g_WindowHeight * 0.4F));
+    m_Quit.setPosition(sf::Vector2f((g_WindowWidth / 2.0F) - (m_Quit.getGlobalBounds().size.x / 2.0F), g_WindowHeight * 0.6F));
+}
+
 void GameOver::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(m_Title, states);

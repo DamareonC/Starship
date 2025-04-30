@@ -105,6 +105,11 @@ void Spawner::reset()
     m_FallingEntities.clear();
 }
 
+void Spawner::setSpawnRange()
+{
+    m_SpawnRange = std::uniform_int_distribution<uint32_t>(0U, g_WindowWidth - 32U);
+}
+
 void Spawner::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     for (const std::unique_ptr<IFallingEntity>& fallingEntity : m_FallingEntities)

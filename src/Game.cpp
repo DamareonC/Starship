@@ -4,7 +4,7 @@ inline const sf::Font g_FONT(std::filesystem::path("res/fonts/architext.ttf"));
 
 void run()
 {
-    sf::RenderWindow window(sf::VideoMode(sf::Vector2u(g_WindowWidth, g_WindowHeight)), sf::String("Starship"), sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(sf::Vector2u(g_WindowWidth, g_WindowHeight)), sf::String("Starship"));
     window.setIcon(sf::Image(std::filesystem::path("res/sprites/ship.png")));
 
     Screen screen = Screen::START_MENU;
@@ -60,6 +60,6 @@ void run()
                 break;
         }
 
-        events(window, screen, startMenu, gameOver);
+        events(window, screen, startMenu, gameOver, spawner);
     }
 }
