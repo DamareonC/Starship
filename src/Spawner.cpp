@@ -4,8 +4,8 @@
 #include "DoubleShot.hpp"
 #include "Shield.hpp"
 #include "SpeedBoost.hpp"
-
-#include <chrono>
+#include <cstdint>
+#include <random>
 
 inline unsigned int g_WindowWidth, g_WindowHeight;
 inline uint32_t g_Score;
@@ -14,16 +14,28 @@ Spawner::Spawner() :
     m_SpawnRange(0U, g_WindowWidth - 32U),
     m_FallingEntityType(0U, 19U),
     m_EnemyType(0U, 9U),
-    m_PowerUpType(0U, 2U)
+    m_PowerUpType(0U, 2U),
+    m_SpawnTime(30U, 180U)
 {
     m_FallingEntities.reserve(20U);
 }
 
 void Spawner::update()
 {
-    if (m_UpdateCount == 0U)
+    if (m_UpdatesUntilNextSpawn == 0U)
     {
+        m_TotalEntitiesSpawned++;
         spawnFallingEntity();
+        m_UpdatesUntilNextSpawn = m_SpawnTime(m_Mt);
+    }
+    else
+    {
+        m_UpdatesUntilNextSpawn--;
+    }
+
+    if (m_TotalEntitiesSpawned != 0 && m_TotalEntitiesSpawned % 10 == 0)
+    {
+        decreaseSpawnTime();
     }
 
     if (m_FallingEntities.size() > 0U)
@@ -60,8 +72,16 @@ void Spawner::increaseSpeed()
 
         if (g_Score != 0U)
         {
-            m_GlobalBaseSpeed += (g_Score / 10U) * 0.02F;
+            m_GlobalBaseSpeed += (float(g_Score) / 10.0F) * 0.02F;
         }
+    }
+}
+
+void Spawner::decreaseSpawnTime()
+{
+    if (m_SpawnTime.max() > 60)
+    {
+        m_SpawnTime = std::uniform_int_distribution<uint32_t>(m_SpawnTime.min(), m_SpawnTime.max() - 10U);
     }
 }
 

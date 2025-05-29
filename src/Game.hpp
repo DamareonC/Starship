@@ -16,10 +16,10 @@ static void update(Ship& ship, Spawner& spawner, sf::Text& scoreText, sf::Text& 
 
     for (Bullet& bullet : ship.getBullets())
     {
-        checkCollision(spawner.getFallingEntities(), bullet);
+        checkCollision(spawner.getFallingEntities(), bullet, g_Score);
     }
 
-    checkCollision(spawner.getFallingEntities(), ship);
+    checkCollision(spawner.getFallingEntities(), ship, g_Score);
     updateScores(scoreText, highScoreText);
 
     if (ship.isDestroyed())
@@ -100,6 +100,8 @@ static void events(sf::RenderWindow& window, Screen& screen, StartMenu& startMen
                     case Screen::GAME_OVER:
                         screen = gameOver.onClick(sf::Vector2f(mouseButtonPressed->position.x, mouseButtonPressed->position.y));
                         break;
+                    default:
+                        break;
                 }
 
                 if (screen == Screen::GAME)
@@ -117,6 +119,8 @@ static void events(sf::RenderWindow& window, Screen& screen, StartMenu& startMen
                     break;
                 case Screen::GAME_OVER:
                     gameOver.onHover(sf::Vector2f(mouseMoved->position.x, mouseMoved->position.y));
+                    break;
+                default:
                     break;
             }
         }

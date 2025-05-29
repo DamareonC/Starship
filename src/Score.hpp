@@ -1,5 +1,8 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
+#include <cstdint>
 #include <fstream>
 
 inline uint32_t g_Score = 0U;

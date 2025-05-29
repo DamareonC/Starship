@@ -3,10 +3,9 @@
 #include "IFallingEntity.hpp"
 #include "IPowerUp.hpp"
 #include "Bullet.hpp"
+#include "Ship.hpp"
 
-//g_Score will be included from Score.hpp in Game.cpp
-
-static void checkCollision(const std::vector<std::unique_ptr<IFallingEntity>>& fallingEntities, IEntity& entity)
+static void checkCollision(const std::vector<std::unique_ptr<IFallingEntity>>& fallingEntities, IEntity& entity, uint32_t& score)
 {
     for (const std::unique_ptr<IFallingEntity>& fallingEntity : fallingEntities)
     {
@@ -18,7 +17,7 @@ static void checkCollision(const std::vector<std::unique_ptr<IFallingEntity>>& f
             {
                 fallingEntity->destroy();
                 bullet->destroy();
-                g_Score += fallingEntity->getScore();
+                score += fallingEntity->getScore();
             }
 
             Ship* ship = dynamic_cast<Ship*>(&entity);
