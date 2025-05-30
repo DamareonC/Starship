@@ -4,6 +4,7 @@
 #include "DoubleShot.hpp"
 #include "Shield.hpp"
 #include "SpeedBoost.hpp"
+
 #include <cstdint>
 #include <random>
 
@@ -24,7 +25,7 @@ void Spawner::update()
 {
     if (m_UpdatesUntilNextSpawn == 0U)
     {
-        m_TotalEntitiesSpawned++;
+        m_EntitiesSpawned++;
         spawnFallingEntity();
         m_UpdatesUntilNextSpawn = m_SpawnTime(m_Mt);
     }
@@ -33,9 +34,10 @@ void Spawner::update()
         m_UpdatesUntilNextSpawn--;
     }
 
-    if (m_TotalEntitiesSpawned != 0 && m_TotalEntitiesSpawned % 10 == 0)
+    if (m_EntitiesSpawned != 0 && m_EntitiesSpawned % 10 == 0)
     {
         decreaseSpawnTime();
+        m_EntitiesSpawned = 0;
     }
 
     if (m_FallingEntities.size() > 0U)
