@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IEntity.hpp"
-
 #include <SFML/Audio.hpp>
+
+#include "IEntity.hpp"
 
 class IFallingEntity : public IEntity
 {

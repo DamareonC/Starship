@@ -1,12 +1,12 @@
+#include <cstdint>
+#include <random>
+
 #include "Spawner.hpp"
 #include "Asteroid.hpp"
 #include "Missle.hpp"
 #include "DoubleShot.hpp"
 #include "Shield.hpp"
 #include "SpeedBoost.hpp"
-
-#include <cstdint>
-#include <random>
 
 inline unsigned int g_WindowWidth, g_WindowHeight;
 inline uint32_t g_Score;
@@ -123,6 +123,7 @@ void Spawner::reset()
 {
     m_UpdateCount = m_SecondCount = 0U;
     m_GlobalBaseSpeed = 3.0F;
+    m_SpawnRange = std::uniform_int_distribution<uint32_t>(30U, 180U);
 
     m_FallingEntities.clear();
 }

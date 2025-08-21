@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IFallingEntity.hpp"
-
 #include <random>
+
+#include "IFallingEntity.hpp"
 
 class Spawner : public sf::Drawable
 {

@@ -1,10 +1,10 @@
 #pragma once
 
+#include <SFML/Audio.hpp>
+
 #include "IEntity.hpp"
 #include "IPowerUp.hpp"
 #include "Bullet.hpp"
-
-#include <SFML/Audio.hpp>
 
 class Ship : public IEntity
 {

@@ -24,7 +24,9 @@ For a basic build using the default generator and build configurations:
 2. Clone this repo with `git clone https://github.com/DamareonC/Starship.git`
 3. Move into the directory with `cd Starship`
 4. Generate the build files with `cmake -B build`
-5. Build Starship with `cmake --build build --parallel 8` (if you are using Visual Studio or Xcode, you can instead open their respective files and build it in the IDE)
+5. Build Starship with `cmake --build build`* (if you are using Visual Studio or Xcode, you can instead open their respective files and build it in the IDE)
+
+*You can also use the `--parallel <cores>` option to specify how many cores you want to use to build Starship. Just replace `<cores>` with the desired number of cores.
 
 ## Running Starship
 
