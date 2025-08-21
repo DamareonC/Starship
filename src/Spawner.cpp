@@ -121,9 +121,9 @@ void Spawner::spawnFallingEntity()
 
 void Spawner::reset()
 {
-    m_UpdateCount = m_SecondCount = 0U;
+    m_SpawnTime = std::uniform_int_distribution<uint32_t>(30U, 180U);
+    m_UpdateCount = m_SecondCount = m_UpdatesUntilNextSpawn = m_EntitiesSpawned = 0U;
     m_GlobalBaseSpeed = 3.0F;
-    m_SpawnRange = std::uniform_int_distribution<uint32_t>(30U, 180U);
 
     m_FallingEntities.clear();
 }
